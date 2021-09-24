@@ -47,49 +47,46 @@ void addInfo(List_t* node, char* info, const char* structFieldName) { // F-first
         strcpy(node->middlename, info);
     }
 }
-void dataStructureSwap(List_t* node_1, List_t* node_2) {
-    if (!node_1) {
-        printf("Error the pointer was NULL\n");
-        exit(4);
+List_t* insertInFrontOfNode(List_t** node, List_t** nodeInList, List_t* head) {
+    List_t* tmp;
+    tmp = head;
+    if (*nodeInList == head) {
+        (*node)->next = head;
+        head = *(node);
+        return head;
     }
-    if (!node_2) {
-        printf("Error the pointer was NULL\n");
-        exit(5);
+    else {
+        while (tmp->next != *(nodeInList)) {
+            tmp = tmp->next;
+        }
+        (*node)->next = tmp->next;
+        tmp->next = *node;
     }
-    char* tmp;
-    tmp = node_1->firstname;//swapping firstnames
-    node_1->firstname = node_2->firstname;
-    node_2->firstname = tmp;
-    tmp = node_1->lastname;//swapping lastnames
-    node_1->lastname = node_2->lastname;
-    node_2->lastname = tmp;
-    tmp = node_1->middlename;//swapping middlenames
-    node_1->middlename = node_2->middlename;
-    node_2->middlename = tmp;
-};
-int insertInPos(char* nodeName, char* nodeInListName, List_t** node, List_t** nodeInList) { // F-firstname, L-Lastname, M-Middlename
+    return head;
+}
+int insertInPos(char* nodeName, char* nodeInListName, List_t** node, List_t** nodeInList, List_t** head) {
     if (strcmp(nodeName, nodeInListName) < 0) {
-        (*node)->next = (*nodeInList)->next;
-        (*nodeInList)->next = (*node);
-        dataStructureSwap(*(node), *(nodeInList));
-        return 1;//position was found
+        *head = insertInFrontOfNode(node, nodeInList, *head);
+        return posWasFound;//position was found
     }
     else {
         if ((*nodeInList)->next == NULL) {
             (*nodeInList)->next = (*node);
-            return 2;//position was found
+            return anotherPosWasFound;//position was found
         }
         else {
             (*nodeInList) = (*nodeInList)->next;
-            return 0;//position was not found
+            return posWasNotFound;//position was not found
         }
     }
 }
-void sortNode(List_t* root, List_t* node) {
+List_t* sortNode(List_t* root, List_t* node) {
     int resCmpFirst;
     int resCmpLast;
     int resCmpMiddle;
     int resInsertInPos;
+    List_t* head;
+    head = root;
     while (1) {
         resCmpFirst = strcmp(node->firstname, root->firstname);
         resCmpLast = strcmp(node->lastname, root->lastname);
@@ -101,8 +98,8 @@ void sortNode(List_t* root, List_t* node) {
         }
 
         if ((resCmpFirst == 0) && (resCmpLast == 0)) {
-            resInsertInPos = insertInPos(node->middlename, root->middlename, &node, &root);
-            if (resInsertInPos == 1 || resInsertInPos == 2) {
+            resInsertInPos = insertInPos(node->middlename, root->middlename, &node, &root, &head);
+            if (resInsertInPos == posWasFound || resInsertInPos == anotherPosWasFound) {
                 break;
             }
             else {
@@ -110,22 +107,23 @@ void sortNode(List_t* root, List_t* node) {
             }
         }
         if (resCmpLast == 0) {
-            resInsertInPos = insertInPos(node->firstname, root->firstname, &node, &root);
-            if (resInsertInPos == 1 || resInsertInPos == 2) {
+            resInsertInPos = insertInPos(node->firstname, root->firstname, &node, &root, &head);
+            if (resInsertInPos == posWasFound || resInsertInPos == anotherPosWasFound) {
                 break;
             }
             else {
                 continue;
             }
         }
-        resInsertInPos = insertInPos(node->lastname, root->lastname, &node, &root);
-        if (resInsertInPos == 1 || resInsertInPos == 2) {
+        resInsertInPos = insertInPos(node->lastname, root->lastname, &node, &root, &head);
+        if (resInsertInPos == posWasFound || resInsertInPos == anotherPosWasFound) {
             break;
         }
         else {
             continue;
         }
     }
+    return head;
 }
 void findNode(List_t* root) {
     char strLast[MAX_ARRAY_SIZE];
@@ -172,7 +170,7 @@ int main(void) {
             addInfo(newNod, buffer, "F");
             fscanf(f, "%s", buffer);
             addInfo(newNod, buffer, "M");
-            sortNode(root, newNod);
+            root = sortNode(root, newNod);
             s = fscanf(f, "%s", buffer);
         }
         printList(root);
