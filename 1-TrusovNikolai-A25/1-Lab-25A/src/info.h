@@ -1,5 +1,5 @@
+#pragma once
 #define MAX_ARRAY_SIZE 50
-
 typedef struct List {
     char* firstname;
     char* lastname;
