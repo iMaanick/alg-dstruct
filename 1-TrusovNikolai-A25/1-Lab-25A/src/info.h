@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include<stdlib.h>
-#include<string.h>
 #define MAX_ARRAY_SIZE 50
 
 typedef struct List {
