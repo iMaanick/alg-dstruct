@@ -14,6 +14,6 @@ void dataStructureSwap(List_t* node_1, List_t* node_2);
 void printNode(List_t* node);
 void printList(List_t* root);
 void addInfo(List_t* node, char* info, const char* structFieldName);
-int InsertInPos(char* nodeName, char* nodeInListName, List_t** node, List_t** nodeInList);
+int insertInPos(char* nodeName, char* nodeInListName, List_t** node, List_t** nodeInList);
 void sortNode(List_t* root, List_t* node);
 void findNode(List_t* root);

@@ -45,7 +45,7 @@ TEST(dataStructureSwap, checking_swapping_data) {
 	ASSERT_STRCASEEQ(node_2->lastname, strB);
 	ASSERT_STRCASEEQ(node_2->middlename, strC);
 }
-TEST(InsertInPos, checking_that_1_is_returned_if_nodeName_is_less_than_nodeInListName) {
+TEST(insertInPos, checking_that_1_is_returned_if_nodeName_is_less_than_nodeInListName) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
 	char strA[] = { "A" };
@@ -60,9 +60,9 @@ TEST(InsertInPos, checking_that_1_is_returned_if_nodeName_is_less_than_nodeInLis
 	node_2->firstname = strD;
 	node_2->lastname = strE;
 	node_2->middlename = strF;
-	ASSERT_EQ(InsertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2), 1);
+	ASSERT_EQ(insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2), 1);
 }
-TEST(InsertInPos, checking_that_2_is_returned_if_nodeName_is_bigger_than_nodeInListName_and_nodeInList_next_is_NULL) {
+TEST(insertInPos, checking_that_2_is_returned_if_nodeName_is_bigger_than_nodeInListName_and_nodeInList_next_is_NULL) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
 	node_2->next = NULL;
@@ -78,9 +78,9 @@ TEST(InsertInPos, checking_that_2_is_returned_if_nodeName_is_bigger_than_nodeInL
 	node_2->firstname = strA;
 	node_2->lastname = strE;
 	node_2->middlename = strF;
-	ASSERT_EQ(InsertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2), 2);
+	ASSERT_EQ(insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2), 2);
 }
-TEST(InsertInPos, checking_that_2_is_returned_if_nodeName_is_equal_to_nodeInListName_and_nodeInList_next_is_NULL) {
+TEST(insertInPos, checking_that_2_is_returned_if_nodeName_is_equal_to_nodeInListName_and_nodeInList_next_is_NULL) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
 	node_2->next = NULL;
@@ -95,9 +95,9 @@ TEST(InsertInPos, checking_that_2_is_returned_if_nodeName_is_equal_to_nodeInList
 	node_2->firstname = strA;
 	node_2->lastname = strE;
 	node_2->middlename = strF;
-	ASSERT_EQ(InsertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2), 2);
+	ASSERT_EQ(insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2), 2);
 }
-TEST(InsertInPos, checking_that_0_is_returned_if_nodeName_is_bigger_than_nodeInListName_and_nodeInList_next_is_not_NULL) {
+TEST(insertInPos, checking_that_0_is_returned_if_nodeName_is_bigger_than_nodeInListName_and_nodeInList_next_is_not_NULL) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
 	char strA[] = { "A" };
@@ -112,9 +112,9 @@ TEST(InsertInPos, checking_that_0_is_returned_if_nodeName_is_bigger_than_nodeInL
 	node_2->firstname = strA;
 	node_2->lastname = strE;
 	node_2->middlename = strF;
-	ASSERT_EQ(InsertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2), 0);
+	ASSERT_EQ(insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2), 0);
 }
-TEST(InsertInPos, checking_that_0_is_returned_if_nodeName_is_equal_to_nodeInListName_and_nodeInList_next_is_not_NULL) {
+TEST(insertInPos, checking_that_0_is_returned_if_nodeName_is_equal_to_nodeInListName_and_nodeInList_next_is_not_NULL) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
 	char strA[] = { "A" };
@@ -128,9 +128,9 @@ TEST(InsertInPos, checking_that_0_is_returned_if_nodeName_is_equal_to_nodeInList
 	node_2->firstname = strA;
 	node_2->lastname = strE;
 	node_2->middlename = strF;
-	ASSERT_EQ(InsertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2), 0);
+	ASSERT_EQ(insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2), 0);
 }
-TEST(InsertInPos, checking_that_nodeInList_points_to_next_node_if_nodeName_is_bigger_than_nodeInListName_and_nodeInList_next_is_not_NULL) {
+TEST(insertInPos, checking_that_nodeInList_points_to_next_node_if_nodeName_is_bigger_than_nodeInListName_and_nodeInList_next_is_not_NULL) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2_next = (List_t*)malloc(sizeof(List_t));
@@ -153,12 +153,12 @@ TEST(InsertInPos, checking_that_nodeInList_points_to_next_node_if_nodeName_is_bi
 	node_2_next->firstname = strH;
 	node_2_next->lastname = strI;
 	node_2_next->middlename = strJ;
-	InsertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2);
+	insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2);
 	ASSERT_STRCASEEQ(node_2->firstname, strH);
 	ASSERT_STRCASEEQ(node_2->lastname, strI);
 	ASSERT_STRCASEEQ(node_2->middlename, strJ);
 }
-TEST(InsertInPos, checking_that_nodeInList_points_to_next_node_if_nodeName_is_equal_to_nodeInListName_and_nodeInList_next_is_not_NULL) {
+TEST(insertInPos, checking_that_nodeInList_points_to_next_node_if_nodeName_is_equal_to_nodeInListName_and_nodeInList_next_is_not_NULL) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2_next = (List_t*)malloc(sizeof(List_t));
@@ -180,7 +180,7 @@ TEST(InsertInPos, checking_that_nodeInList_points_to_next_node_if_nodeName_is_eq
 	node_2_next->firstname = strH;
 	node_2_next->lastname = strI;
 	node_2_next->middlename = strJ;
-	InsertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2);
+	insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2);
 	ASSERT_STRCASEEQ(node_2->firstname, strH);
 	ASSERT_STRCASEEQ(node_2->lastname, strI);
 	ASSERT_STRCASEEQ(node_2->middlename, strJ);

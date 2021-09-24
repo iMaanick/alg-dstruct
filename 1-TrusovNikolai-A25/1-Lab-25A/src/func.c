@@ -68,7 +68,7 @@ void dataStructureSwap(List_t* node_1, List_t* node_2) {
     node_1->middlename = node_2->middlename;
     node_2->middlename = tmp;
 };
-int InsertInPos(char* nodeName, char* nodeInListName, List_t** node, List_t** nodeInList) { // F-firstname, L-Lastname, M-Middlename
+int insertInPos(char* nodeName, char* nodeInListName, List_t** node, List_t** nodeInList) { // F-firstname, L-Lastname, M-Middlename
     if (strcmp(nodeName, nodeInListName) < 0) {
         (*node)->next = (*nodeInList)->next;
         (*nodeInList)->next = (*node);
@@ -102,7 +102,7 @@ void sortNode(List_t* root, List_t* node) {
         }
 
         if ((resCmpFirst == 0) && (resCmpLast == 0)) {
-            resInsertInPos = InsertInPos(node->middlename, root->middlename, &node, &root);
+            resInsertInPos = insertInPos(node->middlename, root->middlename, &node, &root);
             if (resInsertInPos == 1 || resInsertInPos == 2) {
                 break;
             }
@@ -111,7 +111,7 @@ void sortNode(List_t* root, List_t* node) {
             }
         }
         if (resCmpLast == 0) {
-            resInsertInPos = InsertInPos(node->firstname, root->firstname, &node, &root);
+            resInsertInPos = insertInPos(node->firstname, root->firstname, &node, &root);
             if (resInsertInPos == 1 || resInsertInPos == 2) {
                 break;
             }
@@ -119,7 +119,7 @@ void sortNode(List_t* root, List_t* node) {
                 continue;
             }
         }
-        resInsertInPos = InsertInPos(node->lastname, root->lastname, &node, &root);
+        resInsertInPos = insertInPos(node->lastname, root->lastname, &node, &root);
         if (resInsertInPos == 1 || resInsertInPos == 2) {
             break;
         }
