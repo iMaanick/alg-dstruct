@@ -6,18 +6,30 @@ extern "C" {
 }
 TEST(addInfo, adding_new_data_in_firstname) {
 	List_t* tmp = (List_t*)malloc(sizeof(List_t));
+	if (!tmp) {
+		printf("Error allocating memory\n");
+		exit(1);
+	}
 	char buffer[] = { "Ivan" };
 	addInfo(tmp, buffer, "F");
 	ASSERT_STRCASEEQ(buffer, tmp->firstname);
 }
 TEST(addInfo, adding_new_data_in_lastname) {
 	List_t* tmp = (List_t*)malloc(sizeof(List_t));
+	if (!tmp) {
+		printf("Error allocating memory\n");
+		exit(1);
+	}
 	char buffer[] = { "Ivanov" };
 	addInfo(tmp, buffer, "L");
 	ASSERT_STRCASEEQ(buffer, tmp->lastname);
 }
 TEST(addInfo, adding_new_data_in_middlename) {
 	List_t* tmp = (List_t*)malloc(sizeof(List_t));
+	if (!tmp) {
+		printf("Error allocating memory\n");
+		exit(1);
+	}
 	char buffer[] = { "Ivanovich" };
 	addInfo(tmp, buffer, "M");
 	ASSERT_STRCASEEQ(buffer, tmp->middlename);
@@ -25,6 +37,10 @@ TEST(addInfo, adding_new_data_in_middlename) {
 TEST(insertInFrontOfNode, checking_that_node_2_is_inserted_in_front_of_the_head) {
 	List_t* head_node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
+	if (!head_node_1 || !node_2) {
+		printf("Error allocating memory\n");
+		exit(1);
+	}
 	char strA[] = { "A" };
 	char strB[] = { "B" };
 	char strC[] = { "C" };
@@ -49,6 +65,10 @@ TEST(insertInFrontOfNode, checking_that_node_2_is_inserted_in_front_of_the_node_
 	List_t* head = (List_t*)malloc(sizeof(List_t));
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
+	if (!head || !node_1 || !node_2) {
+		printf("Error allocating memory\n");
+		exit(1);
+	}
 	head->next = node_1;
 	char strA[] = { "A" };
 	char strB[] = { "B" };
@@ -78,6 +98,10 @@ TEST(insertInFrontOfNode, checking_that_node_2_is_inserted_in_front_of_the_node_
 TEST(insertInPos, checking_that_posWasFound_is_returned_if_nodeName_is_less_than_nodeInListName) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
+	if (!node_1 || !node_2) {
+		printf("Error allocating memory\n");
+		exit(1);
+	}
 	char strA[] = { "A" };
 	char strB[] = { "B" };
 	char strC[] = { "C" };
@@ -96,6 +120,10 @@ TEST(insertInPos, checking_that_posWasFound_is_returned_if_nodeName_is_less_than
 TEST(insertInPos, checking_that_anotherPosWasFound_is_returned_if_nodeName_is_bigger_than_nodeInListName_and_nodeInList_next_is_NULL) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
+	if (!node_1 || !node_2) {
+		printf("Error allocating memory\n");
+		exit(1);
+	}
 	node_2->next = NULL;
 	char strA[] = { "A" };
 	char strB[] = { "B" };
@@ -114,6 +142,10 @@ TEST(insertInPos, checking_that_anotherPosWasFound_is_returned_if_nodeName_is_bi
 TEST(insertInPos, checking_that_anotherPosWasFound_is_returned_if_nodeName_is_equal_to_nodeInListName_and_nodeInList_next_is_NULL) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
+	if (!node_1 || !node_2) {
+		printf("Error allocating memory\n");
+		exit(1);
+	}
 	node_2->next = NULL;
 	char strA[] = { "A" };
 	char strB[] = { "B" };
@@ -132,6 +164,10 @@ TEST(insertInPos, checking_that_anotherPosWasFound_is_returned_if_nodeName_is_eq
 TEST(insertInPos, checking_that_posWasNotFound_is_returned_if_nodeName_is_bigger_than_nodeInListName_and_nodeInList_next_is_not_NULL) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
+	if (!node_1 || !node_2) {
+		printf("Error allocating memory\n");
+		exit(1);
+	}
 	char strA[] = { "A" };
 	char strB[] = { "B" };
 	char strC[] = { "C" };
@@ -149,6 +185,10 @@ TEST(insertInPos, checking_that_posWasNotFound_is_returned_if_nodeName_is_bigger
 TEST(insertInPos, checking_that_posWasNotFound_is_returned_if_nodeName_is_equal_to_nodeInListName_and_nodeInList_next_is_not_NULL) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
+	if (!node_1 || !node_2) {
+		printf("Error allocating memory\n");
+		exit(1);
+	}
 	char strA[] = { "A" };
 	char strB[] = { "B" };
 	char strC[] = { "C" };
@@ -166,6 +206,10 @@ TEST(insertInPos, checking_that_nodeInList_points_to_next_node_if_nodeName_is_bi
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2_next = (List_t*)malloc(sizeof(List_t));
+	if (!node_1 || !node_2 || !node_2_next) {
+		printf("Error allocating memory\n");
+		exit(1);
+	}
 	node_2->next = node_2_next;
 	char strA[] = { "A" };
 	char strB[] = { "B" };
@@ -194,6 +238,10 @@ TEST(insertInPos, checking_that_nodeInList_points_to_next_node_if_nodeName_is_eq
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2_next = (List_t*)malloc(sizeof(List_t));
+	if (!node_1 || !node_2 || !node_2_next) {
+		printf("Error allocating memory\n");
+		exit(1);
+	}
 	node_2->next = node_2_next;
 	char strB[] = { "B" };
 	char strC[] = { "C" };
@@ -219,8 +267,12 @@ TEST(insertInPos, checking_that_nodeInList_points_to_next_node_if_nodeName_is_eq
 }
 TEST(sortNode, checking_node_addition_if_data_root_is_equal_to_data_node) {
 	List_t* root = (List_t*)malloc(sizeof(List_t));
-	root->next = NULL;
 	List_t* node = (List_t*)malloc(sizeof(List_t));
+	if (!root || !node) {
+		printf("Error allocating memory\n");
+		exit(1);
+	}
+	root->next = NULL;
 	char firstname[] = { "A" };
 	char lastname[] = { "B" };
 	char middlename[] = { "C" };
@@ -240,8 +292,12 @@ TEST(sortNode, checking_node_addition_if_data_root_is_equal_to_data_node) {
 }
 TEST(sortNode, checking_sorting_by_lastnames) {
 	List_t* root = (List_t*)malloc(sizeof(List_t));
-	root->next = NULL;
 	List_t* node = (List_t*)malloc(sizeof(List_t));
+	if (!root || !node) {
+		printf("Error allocating memory\n");
+		exit(1);
+	}
+	root->next = NULL;
 	char strA[] = { "A" };
 	char strB[] = { "B" };
 	char strC[] = { "C" };
@@ -264,8 +320,12 @@ TEST(sortNode, checking_sorting_by_lastnames) {
 }
 TEST(sortNode, checking_sorting_by_firstnames) {
 	List_t* root = (List_t*)malloc(sizeof(List_t));
-	root->next = NULL;
 	List_t* node = (List_t*)malloc(sizeof(List_t));
+	if (!root || !node) {
+		printf("Error allocating memory\n");
+		exit(1);
+	}
+	root->next = NULL;
 	char strA[] = { "A" };
 	char strB[] = { "B" };
 	char strC[] = { "C" };
@@ -287,8 +347,12 @@ TEST(sortNode, checking_sorting_by_firstnames) {
 }
 TEST(sortNode, checking_sorting_by_middlenames) {
 	List_t* root = (List_t*)malloc(sizeof(List_t));
-	root->next = NULL;
 	List_t* node = (List_t*)malloc(sizeof(List_t));
+	if (!root || !node) {
+		printf("Error allocating memory\n");
+		exit(1);
+	}
+	root->next = NULL;
 	char strA[] = { "A" };
 	char strB[] = { "B" };
 	char strC[] = { "C" };
