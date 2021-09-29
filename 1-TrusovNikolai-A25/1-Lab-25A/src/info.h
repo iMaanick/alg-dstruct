@@ -1,8 +1,8 @@
 #pragma once
 #define MAX_ARRAY_SIZE 50
-#define posWasFound 1
-#define anotherPosWasFound 2
-#define posWasNotFound 0
+#define POS_WAS_FOUND 1 
+#define ANOTHER_POS_WAS_FOUND 2
+#define POS_WAS_NOT_FOUND 0
 typedef struct List {
     char* firstname;
     char* lastname;

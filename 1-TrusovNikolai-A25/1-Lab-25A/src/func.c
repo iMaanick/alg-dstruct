@@ -87,16 +87,16 @@ int insertInPos(char* nodeName, char* nodeInListName, List_t** node, List_t** no
     }
     if (strcmp(nodeName, nodeInListName) < 0) {
         *head = insertInFrontOfNode(node, nodeInList, *head);
-        return posWasFound;//position was found
+        return POS_WAS_FOUND;//position was found
     }
     else {
         if ((*nodeInList)->next == NULL) {
             (*nodeInList)->next = (*node);
-            return anotherPosWasFound;//position was found
+            return ANOTHER_POS_WAS_FOUND;//position was found
         }
         else {
             (*nodeInList) = (*nodeInList)->next;
-            return posWasNotFound;//position was not found
+            return POS_WAS_NOT_FOUND;//position was not found
         }
     }
 }
@@ -123,7 +123,7 @@ List_t* sortNode(List_t* root, List_t* node) {
 
         if ((resCmpFirst == 0) && (resCmpLast == 0)) {
             resInsertInPos = insertInPos(node->middlename, root->middlename, &node, &root, &head);
-            if (resInsertInPos == posWasFound || resInsertInPos == anotherPosWasFound) {
+            if (resInsertInPos == POS_WAS_FOUND || resInsertInPos == ANOTHER_POS_WAS_FOUND) {
                 break;
             }
             else {
@@ -132,7 +132,7 @@ List_t* sortNode(List_t* root, List_t* node) {
         }
         if (resCmpLast == 0) {
             resInsertInPos = insertInPos(node->firstname, root->firstname, &node, &root, &head);
-            if (resInsertInPos == posWasFound || resInsertInPos == anotherPosWasFound) {
+            if (resInsertInPos == POS_WAS_FOUND || resInsertInPos == ANOTHER_POS_WAS_FOUND) {
                 break;
             }
             else {
@@ -140,7 +140,7 @@ List_t* sortNode(List_t* root, List_t* node) {
             }
         }
         resInsertInPos = insertInPos(node->lastname, root->lastname, &node, &root, &head);
-        if (resInsertInPos == posWasFound || resInsertInPos == anotherPosWasFound) {
+        if (resInsertInPos == POS_WAS_FOUND || resInsertInPos == ANOTHER_POS_WAS_FOUND) {
             break;
         }
         else {

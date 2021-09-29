@@ -13,6 +13,7 @@ TEST(addInfo, adding_new_data_in_firstname) {
 	char buffer[] = { "Ivan" };
 	addInfo(tmp, buffer, "F");
 	ASSERT_STRCASEEQ(buffer, tmp->firstname);
+	free(tmp);
 }
 TEST(addInfo, adding_new_data_in_lastname) {
 	List_t* tmp = (List_t*)malloc(sizeof(List_t));
@@ -23,6 +24,7 @@ TEST(addInfo, adding_new_data_in_lastname) {
 	char buffer[] = { "Ivanov" };
 	addInfo(tmp, buffer, "L");
 	ASSERT_STRCASEEQ(buffer, tmp->lastname);
+	free(tmp);
 }
 TEST(addInfo, adding_new_data_in_middlename) {
 	List_t* tmp = (List_t*)malloc(sizeof(List_t));
@@ -33,6 +35,7 @@ TEST(addInfo, adding_new_data_in_middlename) {
 	char buffer[] = { "Ivanovich" };
 	addInfo(tmp, buffer, "M");
 	ASSERT_STRCASEEQ(buffer, tmp->middlename);
+	free(tmp);
 }
 TEST(insertInFrontOfNode, checking_that_node_2_is_inserted_in_front_of_the_head) {
 	List_t* head_node_1 = (List_t*)malloc(sizeof(List_t));
@@ -60,6 +63,8 @@ TEST(insertInFrontOfNode, checking_that_node_2_is_inserted_in_front_of_the_head)
 	ASSERT_STRCASEEQ(head_node_1->next->firstname, strA);
 	ASSERT_STRCASEEQ(head_node_1->next->lastname, strB);
 	ASSERT_STRCASEEQ(head_node_1->next->middlename, strC);
+	free(head_node_1->next);
+	free(head_node_1);
 }
 TEST(insertInFrontOfNode, checking_that_node_2_is_inserted_in_front_of_the_node_1_which_is_not_the_head) {
 	List_t* head = (List_t*)malloc(sizeof(List_t));
@@ -86,16 +91,21 @@ TEST(insertInFrontOfNode, checking_that_node_2_is_inserted_in_front_of_the_node_
 	node_2->lastname = strE;
 	node_2->middlename = strF;
 	head = insertInFrontOfNode(&node_2, &node_1, head);
+	List_t* p;
+	p = head;
 	head = head->next;
+	free(p);
 	ASSERT_STRCASEEQ(head->firstname, strD);
 	ASSERT_STRCASEEQ(head->lastname, strE);
 	ASSERT_STRCASEEQ(head->middlename, strF);
 	ASSERT_STRCASEEQ(head->next->firstname, strA);
 	ASSERT_STRCASEEQ(head->next->lastname, strB);
 	ASSERT_STRCASEEQ(head->next->middlename, strC);
+	free(head->next);
+	free(head);
 }
 
-TEST(insertInPos, checking_that_posWasFound_is_returned_if_nodeName_is_less_than_nodeInListName) {
+TEST(insertInPos, checking_that_POS_WAS_FOUND_is_returned_if_nodeName_is_less_than_nodeInListName) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
 	if (!node_1 || !node_2) {
@@ -114,10 +124,12 @@ TEST(insertInPos, checking_that_posWasFound_is_returned_if_nodeName_is_less_than
 	node_2->firstname = strD;
 	node_2->lastname = strE;
 	node_2->middlename = strF;
-	ASSERT_EQ(insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2, &node_2), posWasFound);
+	ASSERT_EQ(insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2, &node_2), POS_WAS_FOUND);
+	free(node_1->next);
+	free(node_1);
 }
 
-TEST(insertInPos, checking_that_anotherPosWasFound_is_returned_if_nodeName_is_bigger_than_nodeInListName_and_nodeInList_next_is_NULL) {
+TEST(insertInPos, checking_that_ANOTHER_POS_WAS_FOUND_is_returned_if_nodeName_is_bigger_than_nodeInListName_and_nodeInList_next_is_NULL) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
 	if (!node_1 || !node_2) {
@@ -137,9 +149,11 @@ TEST(insertInPos, checking_that_anotherPosWasFound_is_returned_if_nodeName_is_bi
 	node_2->firstname = strA;
 	node_2->lastname = strE;
 	node_2->middlename = strF;
-	ASSERT_EQ(insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2, &node_2), anotherPosWasFound);
+	ASSERT_EQ(insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2, &node_2), ANOTHER_POS_WAS_FOUND);
+	free(node_1);
+	free(node_2);
 }
-TEST(insertInPos, checking_that_anotherPosWasFound_is_returned_if_nodeName_is_equal_to_nodeInListName_and_nodeInList_next_is_NULL) {
+TEST(insertInPos, checking_that_ANOTHER_POS_WAS_FOUND_is_returned_if_nodeName_is_equal_to_nodeInListName_and_nodeInList_next_is_NULL) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
 	if (!node_1 || !node_2) {
@@ -158,10 +172,12 @@ TEST(insertInPos, checking_that_anotherPosWasFound_is_returned_if_nodeName_is_eq
 	node_2->firstname = strA;
 	node_2->lastname = strE;
 	node_2->middlename = strF;
-	ASSERT_EQ(insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2, &node_2), anotherPosWasFound);
+	ASSERT_EQ(insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2, &node_2), ANOTHER_POS_WAS_FOUND);
+	free(node_1);
+	free(node_2);
 }
 
-TEST(insertInPos, checking_that_posWasNotFound_is_returned_if_nodeName_is_bigger_than_nodeInListName_and_nodeInList_next_is_not_NULL) {
+TEST(insertInPos, checking_that_POS_WAS_NOT_FOUND_is_returned_if_nodeName_is_bigger_than_nodeInListName_and_nodeInList_next_is_not_NULL) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
 	if (!node_1 || !node_2) {
@@ -180,9 +196,13 @@ TEST(insertInPos, checking_that_posWasNotFound_is_returned_if_nodeName_is_bigger
 	node_2->firstname = strA;
 	node_2->lastname = strE;
 	node_2->middlename = strF;
-	ASSERT_EQ(insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2, &node_2), posWasNotFound);
+	List_t* p;
+	p = node_2;
+	ASSERT_EQ(insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2, &node_2), POS_WAS_NOT_FOUND);
+	free(node_1);
+	free(p);
 }
-TEST(insertInPos, checking_that_posWasNotFound_is_returned_if_nodeName_is_equal_to_nodeInListName_and_nodeInList_next_is_not_NULL) {
+TEST(insertInPos, checking_that_POS_WAS_NOT_FOUND_is_returned_if_nodeName_is_equal_to_nodeInListName_and_nodeInList_next_is_not_NULL) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
 	List_t* node_2 = (List_t*)malloc(sizeof(List_t));
 	if (!node_1 || !node_2) {
@@ -200,7 +220,11 @@ TEST(insertInPos, checking_that_posWasNotFound_is_returned_if_nodeName_is_equal_
 	node_2->firstname = strA;
 	node_2->lastname = strE;
 	node_2->middlename = strF;
-	ASSERT_EQ(insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2, &node_2), posWasNotFound);
+	List_t* p;
+	p = node_2;
+	ASSERT_EQ(insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2, &node_2), POS_WAS_NOT_FOUND);
+	free(node_1);
+	free(p);
 }
 TEST(insertInPos, checking_that_nodeInList_points_to_next_node_if_nodeName_is_bigger_than_nodeInListName_and_nodeInList_next_is_not_NULL) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
@@ -229,10 +253,19 @@ TEST(insertInPos, checking_that_nodeInList_points_to_next_node_if_nodeName_is_bi
 	node_2_next->firstname = strH;
 	node_2_next->lastname = strI;
 	node_2_next->middlename = strJ;
+	List_t* tmp1;
+	List_t* tmp2;
+	List_t* tmp3;
+	tmp1 = node_1;
+	tmp2 = node_2;
+	tmp3 = node_2_next;
 	insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2, &node_2);
 	ASSERT_STRCASEEQ(node_2->firstname, strH);
 	ASSERT_STRCASEEQ(node_2->lastname, strI);
 	ASSERT_STRCASEEQ(node_2->middlename, strJ);
+	free(tmp1);
+	free(tmp2);
+	free(tmp3);
 }
 TEST(insertInPos, checking_that_nodeInList_points_to_next_node_if_nodeName_is_equal_to_nodeInListName_and_nodeInList_next_is_not_NULL) {
 	List_t* node_1 = (List_t*)malloc(sizeof(List_t));
@@ -260,10 +293,19 @@ TEST(insertInPos, checking_that_nodeInList_points_to_next_node_if_nodeName_is_eq
 	node_2_next->firstname = strH;
 	node_2_next->lastname = strI;
 	node_2_next->middlename = strJ;
+	List_t* tmp1;
+	List_t* tmp2;
+	List_t* tmp3;
+	tmp1 = node_1;
+	tmp2 = node_2;
+	tmp3 = node_2_next;
 	insertInPos(node_1->firstname, node_2->firstname, &node_1, &node_2, &node_2);
 	ASSERT_STRCASEEQ(node_2->firstname, strH);
 	ASSERT_STRCASEEQ(node_2->lastname, strI);
 	ASSERT_STRCASEEQ(node_2->middlename, strJ);
+	free(tmp1);
+	free(tmp2);
+	free(tmp3);
 }
 TEST(sortNode, checking_node_addition_if_data_root_is_equal_to_data_node) {
 	List_t* root = (List_t*)malloc(sizeof(List_t));
@@ -289,6 +331,8 @@ TEST(sortNode, checking_node_addition_if_data_root_is_equal_to_data_node) {
 	ASSERT_STRCASEEQ(root->next->firstname, firstname);
 	ASSERT_STRCASEEQ(root->next->lastname, lastname);
 	ASSERT_STRCASEEQ(root->next->middlename, middlename);
+	free(root);
+	free(node);
 }
 TEST(sortNode, checking_sorting_by_lastnames) {
 	List_t* root = (List_t*)malloc(sizeof(List_t));
@@ -317,6 +361,8 @@ TEST(sortNode, checking_sorting_by_lastnames) {
 	ASSERT_STRCASEEQ(root->next->firstname, strD);
 	ASSERT_STRCASEEQ(root->next->lastname, strE);
 	ASSERT_STRCASEEQ(root->next->middlename, strF);
+	free(root->next);
+	free(root);
 }
 TEST(sortNode, checking_sorting_by_firstnames) {
 	List_t* root = (List_t*)malloc(sizeof(List_t));
@@ -337,6 +383,7 @@ TEST(sortNode, checking_sorting_by_firstnames) {
 	root->firstname = strD;
 	root->lastname = strB;
 	root->middlename = strE;
+
 	root = sortNode(root, node);
 	ASSERT_STRCASEEQ(root->firstname, strA);
 	ASSERT_STRCASEEQ(root->lastname, strB);
@@ -344,6 +391,8 @@ TEST(sortNode, checking_sorting_by_firstnames) {
 	ASSERT_STRCASEEQ(root->next->firstname, strD);
 	ASSERT_STRCASEEQ(root->next->lastname, strB);
 	ASSERT_STRCASEEQ(root->next->middlename, strE);
+	free(root->next);
+	free(root);
 }
 TEST(sortNode, checking_sorting_by_middlenames) {
 	List_t* root = (List_t*)malloc(sizeof(List_t));
@@ -370,4 +419,6 @@ TEST(sortNode, checking_sorting_by_middlenames) {
 	ASSERT_STRCASEEQ(root->next->firstname, strA);
 	ASSERT_STRCASEEQ(root->next->lastname, strB);
 	ASSERT_STRCASEEQ(root->next->middlename, strD);
+	free(root->next);
+	free(root);
 }
