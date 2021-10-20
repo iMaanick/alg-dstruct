@@ -22,46 +22,46 @@ elapsedTime=(double)(end.QuadPart-start.QuadPart)/frequency.QuadPart;
 
 double mallocTest(int size) {
     TIMER_INIT
-        void* arr[MAX_ITERATIONS] = { NULL };
+    void* arr[MAX_ITERATIONS] = { NULL };
     int last_i = 0;
     TIMER_START
-        for (int i = 0; i < MAX_ITERATIONS; i++) {
-            if (rand() % 3 != 0) {
-                arr[i] = malloc(size);
-                last_i = i;
-            }
-            else if (arr[last_i] != NULL) {
-                free(arr[last_i]);
-                arr[last_i] = NULL;
-            }
+    for (int i = 0; i < MAX_ITERATIONS; i++) {
+        if (rand() % 3 != 0) {
+            arr[i] = malloc(size);
+            last_i = i;
         }
+        else if (arr[last_i] != NULL) {
+            free(arr[last_i]);
+            arr[last_i] = NULL;
+        }
+    }
     TIMER_STOP
-        for (int i = 0; i < MAX_ITERATIONS; i++) {
-            free(arr[i]);
-        }
+    for (int i = 0; i < MAX_ITERATIONS; i++) {
+        free(arr[i]);
+    }
     return elapsedTime;
 
 }
 
 double memallocTest(int size) {
     TIMER_INIT
-        void* arr[MAX_ITERATIONS] = { NULL };
+    void* arr[MAX_ITERATIONS] = { NULL };
     int last_i = 0;
     TIMER_START
-        for (int i = 0; i < MAX_ITERATIONS; i++) {
-            if (rand() % 3 != 0) {
-                arr[i] = memalloc(size);
-                last_i = i;
-            }
-            else if (arr[last_i] != NULL) {
-                memfree(arr[last_i]);
-                arr[last_i] = NULL;
-            }
+    for (int i = 0; i < MAX_ITERATIONS; i++) {
+        if (rand() % 3 != 0) {
+            arr[i] = memalloc(size);
+            last_i = i;
         }
+        else if (arr[last_i] != NULL) {
+            memfree(arr[last_i]);
+            arr[last_i] = NULL;
+        }
+    }
     TIMER_STOP
-        for (int i = 0; i < MAX_ITERATIONS; i++) {
-            memfree(arr[i]);
-        }
+    for (int i = 0; i < MAX_ITERATIONS; i++) {
+        memfree(arr[i]);
+    }
     return elapsedTime;
 }
 
