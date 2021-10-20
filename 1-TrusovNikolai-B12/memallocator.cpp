@@ -72,9 +72,8 @@ void* memalloc(int size) {
 			addnext->size = -(sizebefore - size - memgetblocksize());
 			required->next = addnext;
 		}
-		else {
+		else
 			required->size = sizebefore;
-		}
 		return PtrToReturn;
 	}
 	else
@@ -113,9 +112,8 @@ void memfree(void* memory) {
 void memdone() {
 	descriptor* desc = Allocator.desc;
 	while (desc) {
-		if (desc->size > 0) {
+		if (desc->size > 0)
 			fprintf(stderr, "Memory leak detected: %d bytes of %p\n", desc->size, desc);
-		}
 		desc = desc->next;
 	}
 }
