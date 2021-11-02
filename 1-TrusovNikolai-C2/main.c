@@ -2,8 +2,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "graph.h"
-#define TRUE 1
-#define FALSE 0
 int numEdges = 0;
 int numVertex = 0;
 vertex* vertexes;
@@ -20,7 +18,7 @@ edge_t* creatFirstEdge(int startEdge, int endEdge) {
 }
 edge_t* addEdge(edge_t* head, int startEdge, int endEdge) {
     if (!head) {
-        printf("Error the pointer was NULL\n\n");
+        printf("Error the pointer was NULL\n");
         exit(1);
     }
     edge_t* curNode = head;
@@ -49,7 +47,7 @@ void removeList(edge_t* head) {
 void dfs(edge_t* head, int weight) {
     edge_t* curEdge = head;
     fprintf(stdout, "%d ", weight);
-    int minVertexNum = numVertex;
+    int minVertexWeight = numVertex;
     vertexes[weight].isVisited = TRUE;
     int j = 0;
     while (1) {
@@ -57,27 +55,27 @@ void dfs(edge_t* head, int weight) {
             break;
         }
         curEdge = head;
-        minVertexNum = numVertex;
+        minVertexWeight = numVertex;
         for (int i = 0; i < numEdges; i++) {
             if (curEdge->startEdge == weight) {
                 if (vertexes[curEdge->endEdge].isVisited == FALSE) {
-                    if (minVertexNum > curEdge->endEdge) {
-                        minVertexNum = curEdge->endEdge;
+                    if (minVertexWeight > curEdge->endEdge) {
+                        minVertexWeight = curEdge->endEdge;
                     }
                 }
             }
             if (curEdge->endEdge == weight) {
                 if (vertexes[curEdge->startEdge].isVisited == FALSE) {
-                    if (minVertexNum > curEdge->startEdge) {
-                        minVertexNum = curEdge->startEdge;
+                    if (minVertexWeight > curEdge->startEdge) {
+                        minVertexWeight = curEdge->startEdge;
                     }
                 }
             }
             curEdge = curEdge->next;
         }
         j++;
-        if (minVertexNum != numVertex) {
-            dfs(head, minVertexNum);
+        if (minVertexWeight != numVertex) {
+            dfs(head, minVertexWeight);
             j = 0;
         }
     }
