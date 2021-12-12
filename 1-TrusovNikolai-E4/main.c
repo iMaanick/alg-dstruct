@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#define TRUE 0
 
 typedef enum {
     NONE = 0,
@@ -81,7 +81,7 @@ tree_t* Find(tree_t* tree, char* buff) {
         else if (len > tmp->len)
             tmp = tmp->right;
         else {
-            if (strcmp(tmp->word, buff) != 0) {
+            if (strcmp(tmp->word, buff) != TRUE) {
                 return NULL;
             }
             else
